@@ -28,7 +28,7 @@ def format_data(data):
         for word in _counter.items():
             print("Writing {} {} {} to data file.".format(_id,word[0],word[1]))
             data_file.write("{} {} {}\r\n".format(_id,word[0],word[1]))
-            label_file.write("{}\r\n".format(_label))
+        label_file.write("{}\r\n".format(_label))
     data_file.close()
     label_file.close()
 
