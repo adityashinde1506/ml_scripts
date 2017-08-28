@@ -56,6 +56,8 @@ if __name__=="__main__":
 
 # Get folders from dataset and choose last 2 for classification.
     folders=os.listdir(DATAFOLDER)[-2:]
+    print(folders)
+    sys.exit()
 # Convert to absolute path.
     folders=list(map(lambda x:DATAFOLDER+"/"+x,folders))
 # Get documents from folders.
