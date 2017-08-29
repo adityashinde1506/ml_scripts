@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import numpy
 import sys
@@ -8,6 +8,8 @@ import logging
 logging.basicConfig(level=logging.ERROR)
 
 numpy.seterr(over="ignore")
+#seed=int(sys.argv[5])
+numpy.random.seed(1005)
 
 class LogisticRegression(object):
 
@@ -60,10 +62,11 @@ class LogisticRegression(object):
             #logging.debug("prev {} now {}".format(prev_cost,val_cost))
             if prev_cost < val_cost and epoch != 1:
                 logging.info("Alpha is now {}".format(self.alpha))
-                #self.W=prev_self_W
+                self.W=prev_self_W
                 self.alpha*=0.1
                 #pass
             if self.alpha < 0.0001 or epoch > 10000:
+                #self.W=prev_self_W
                 break
             grad=self.__gradient(output,train_y,train_X)
             self.b=self.b-(self.alpha*numpy.mean(output-train_y))
@@ -149,7 +152,7 @@ if __name__=="__main__":
     logging.info("Beginning test.")
     X_test=get_dataset(sys.argv[3],enforce_shape)
 #    y_test=load_data(sys.argv[4])
-#    logging.info("Testing set accuracy is {}".format(LR.accuracy(LR.predict(X_test),y_test[:,numpy.newaxis])))
+#    logging.error("Testing set accuracy is {} for seed {}".format(LR.accuracy(LR.predict(X_test),y_test[:,numpy.newaxis]),seed))
     out=LR.predict(X_test)
     for i in out[:,0]:
         print(int(i))

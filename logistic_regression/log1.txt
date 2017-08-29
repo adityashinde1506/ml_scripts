@@ -1,0 +1,15 @@
+ERROR:root:Testing set accuracy is 0.57 for seed 1000
+ERROR:root:Testing set accuracy is 0.55 for seed 1001
+ERROR:root:Testing set accuracy is 0.5 for seed 1002
+ERROR:root:Testing set accuracy is 0.56 for seed 1003
+ERROR:root:Testing set accuracy is 0.57 for seed 1004
+ERROR:root:Testing set accuracy is 0.59 for seed 1005
+ERROR:root:Testing set accuracy is 0.52 for seed 1006
+ERROR:root:Testing set accuracy is 0.57 for seed 1007
+ERROR:root:Testing set accuracy is 0.57 for seed 1008
+ERROR:root:Testing set accuracy is 0.59 for seed 1009
+ERROR:root:Testing set accuracy is 0.55 for seed 1010
+ERROR:root:Testing set accuracy is 0.54 for seed 1011
+ERROR:root:Testing set accuracy is 0.64 for seed 1012
+ERROR:root:Testing set accuracy is 0.56 for seed 1013
+ERROR:root:Testing set accuracy is 0.58 for seed 1014
