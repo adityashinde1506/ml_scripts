@@ -9,7 +9,8 @@ logging.basicConfig(level=logging.ERROR)
 
 numpy.seterr(over="ignore")
 #seed=int(sys.argv[5])
-numpy.random.seed(1005)
+seed=1005
+numpy.random.seed(seed)
 
 class LogisticRegression(object):
 
@@ -54,6 +55,7 @@ class LogisticRegression(object):
         self.b=numpy.zeros(shape=(1,))
         epoch=1
         prev_cost=0.0
+        prev_grad=0
         while epoch:
             prev_self_W=self.W
             output=self.__sigmoid(self.__output(train_X))
@@ -70,8 +72,9 @@ class LogisticRegression(object):
                 break
             grad=self.__gradient(output,train_y,train_X)
             self.b=self.b-(self.alpha*numpy.mean(output-train_y))
-            self.W=self.W-(self.alpha*grad)
-            if epoch % 100 == 0:
+            self.W=self.W-(self.alpha*grad)-(0.9*prev_grad)
+            prev_grad=self.alpha*grad
+            if epoch % 10 == 0:
                 accuracy=self.accuracy(self.predict(test_X),test_y)
                 logging.info("Epoch {} error {}. Training error {}. Accuracy {}".format(epoch,val_cost,cost,accuracy))
             epoch+=1
