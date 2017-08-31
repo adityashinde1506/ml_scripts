@@ -1,0 +1,202 @@
+ERROR:root:Epoch 10001 error 4.473345205677577. Training error 0.052440700868918715. Accuracy 0.9
+ERROR:root:Epoch 17 error 11.5086293604744. Training error 25.85778915855993. Accuracy 0.6
+ERROR:root:Epoch 10001 error 4.473345205677577. Training error 0.052440700868918715. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.52 for seed 1000
+ERROR:root:Epoch 10001 error 5.170233253987828. Training error 0.05135315909943082. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.52 for seed 1001
+ERROR:root:Epoch 17 error 11.5086293604744. Training error 25.85778915855993. Accuracy 0.6
+ERROR:root:Testing set accuracy is 0.53 for seed 1002
+ERROR:root:Epoch 72 error 10.135396159997644. Training error 5.4264815344231465. Accuracy 0.7
+ERROR:root:Testing set accuracy is 0.49 for seed 1003
+ERROR:root:Epoch 10001 error 3.318446626860509. Training error 0.05246760167135042. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.53 for seed 1004
+ERROR:root:Epoch 164 error 6.525025247743119. Training error 2.362195577150097. Accuracy 0.95
+ERROR:root:Testing set accuracy is 0.54 for seed 1005
+ERROR:root:Epoch 81 error 8.969037309477482. Training error 5.155039808022906. Accuracy 0.7
+ERROR:root:Testing set accuracy is 0.5 for seed 1006
+ERROR:root:Epoch 10001 error 5.585139451942495. Training error 0.051861987441302194. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.51 for seed 1007
+ERROR:root:Epoch 10001 error 4.396332161378057. Training error 0.05249346572837601. Accuracy 0.95
+ERROR:root:Testing set accuracy is 0.5 for seed 1008
+ERROR:root:Epoch 1361 error 6.455171228368041. Training error 0.2823342624465426. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.54 for seed 1009
+ERROR:root:Epoch 288 error 8.05809409975156. Training error 1.343479639002237. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.53 for seed 1010
+ERROR:root:Epoch 18 error 10.824919707467767. Training error 23.65271335157089. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.54 for seed 1011
+ERROR:root:Epoch 66 error 8.387208166151739. Training error 5.591936194239116. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.54 for seed 1012
+ERROR:root:Epoch 1447 error 7.164409812343002. Training error 0.272922518901007. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.53 for seed 1013
+ERROR:root:Epoch 10001 error 2.1459543131485748. Training error 0.05330054325975723. Accuracy 1.0
+ERROR:root:Testing set accuracy is 0.51 for seed 1014
+ERROR:root:Epoch 77 error 9.254715658044557. Training error 5.34787255238245. Accuracy 0.75
+ERROR:root:Testing set accuracy is 0.51 for seed 1015
+ERROR:root:Epoch 849 error 5.9305817079219025. Training error 0.45409547643074105. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.52 for seed 1016
+ERROR:root:Epoch 793 error 4.7636034573123025. Training error 0.4738166420336205. Accuracy 0.95
+ERROR:root:Testing set accuracy is 0.51 for seed 1017
+ERROR:root:Epoch 155 error 6.131419003352189. Training error 2.5588812751301733. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.53 for seed 1018
+ERROR:root:Epoch 145 error 8.846897978318081. Training error 2.619998064158631. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.53 for seed 1019
+ERROR:root:Epoch 1874 error 4.690624032497083. Training error 0.19806922120831183. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.57 for seed 1020
+ERROR:root:Epoch 297 error 7.100878249617018. Training error 1.2589968362812147. Accuracy 0.95
+ERROR:root:Testing set accuracy is 0.56 for seed 1021
+ERROR:root:Epoch 10001 error 4.607178618574928. Training error 0.05236913804031415. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.58 for seed 1022
+ERROR:root:Epoch 351 error 5.229825642124666. Training error 1.076999503037169. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.52 for seed 1023
+ERROR:root:Epoch 10001 error 4.050281417087091. Training error 0.04810780899451397. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.59 for seed 1024
+ERROR:root:Epoch 10001 error 6.020587546408662. Training error 0.05193999278045746. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.53 for seed 1025
+ERROR:root:Epoch 265 error 8.573491636085674. Training error 1.4748085645742783. Accuracy 0.75
+ERROR:root:Testing set accuracy is 0.48 for seed 1026
+ERROR:root:Epoch 4273 error 5.730333289116874. Training error 0.09846534695409859. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.56 for seed 1027
+ERROR:root:Epoch 10001 error 6.900176331160098. Training error 0.3763313063682264. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.49 for seed 1028
+ERROR:root:Epoch 193 error 9.813633481862368. Training error 2.093489965969316. Accuracy 0.75
+ERROR:root:Testing set accuracy is 0.52 for seed 1029
+ERROR:root:Epoch 31 error 10.34281953898718. Training error 13.620552939268073. Accuracy 0.75
+ERROR:root:Testing set accuracy is 0.54 for seed 1030
+ERROR:root:Epoch 70 error 9.38860938945512. Training error 5.7353417627064545. Accuracy 0.7
+ERROR:root:Testing set accuracy is 0.56 for seed 1031
+ERROR:root:Epoch 215 error 8.496585901007116. Training error 1.6902588156355227. Accuracy 0.75
+ERROR:root:Testing set accuracy is 0.55 for seed 1032
+ERROR:root:Epoch 132 error 7.828163165545275. Training error 3.0180357180471753. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.53 for seed 1033
+ERROR:root:Epoch 312 error 8.810409403756417. Training error 1.2591017017651183. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.58 for seed 1034
+ERROR:root:Epoch 599 error 5.163217804031991. Training error 0.6697634374662267. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.52 for seed 1035
+ERROR:root:Epoch 10001 error 3.4772588738759636. Training error 0.05223248175437978. Accuracy 0.95
+ERROR:root:Testing set accuracy is 0.54 for seed 1036
+ERROR:root:Epoch 484 error 7.9903694197053365. Training error 0.7820087141746179. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.49 for seed 1037
+ERROR:root:Epoch 104 error 8.734002277153106. Training error 3.921227348454951. Accuracy 0.75
+ERROR:root:Testing set accuracy is 0.49 for seed 1038
+ERROR:root:Epoch 1682 error 5.001778063889282. Training error 0.23364843076495137. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.54 for seed 1039
+ERROR:root:Epoch 10001 error 5.784815918019687. Training error 0.0520970425295143. Accuracy 0.95
+ERROR:root:Testing set accuracy is 0.54 for seed 1040
+ERROR:root:Epoch 23 error 10.931955835451422. Training error 20.16508005371538. Accuracy 0.65
+ERROR:root:Testing set accuracy is 0.46 for seed 1041
+ERROR:root:Epoch 10001 error 6.69515326894383. Training error 0.05067419828021605. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.53 for seed 1042
+ERROR:root:Epoch 420 error 6.293308165079311. Training error 0.8574351782758187. Accuracy 0.95
+ERROR:root:Testing set accuracy is 0.55 for seed 1043
+ERROR:root:Epoch 400 error 5.02976665653407. Training error 0.9885417728823508. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.52 for seed 1044
+ERROR:root:Epoch 121 error 8.839167131927727. Training error 3.242360444584278. Accuracy 0.75
+ERROR:root:Testing set accuracy is 0.53 for seed 1045
+ERROR:root:Epoch 3261 error 5.863448420995102. Training error 0.12026037096372222. Accuracy 0.95
+ERROR:root:Testing set accuracy is 0.57 for seed 1046
+ERROR:root:Epoch 94 error 10.15267552413017. Training error 4.1765444816883885. Accuracy 0.75
+ERROR:root:Testing set accuracy is 0.53 for seed 1047
+ERROR:root:Epoch 362 error 5.798877980867501. Training error 1.0779055963378865. Accuracy 0.95
+ERROR:root:Testing set accuracy is 0.55 for seed 1048
+ERROR:root:Epoch 137 error 7.336811480221289. Training error 2.843102966753843. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.52 for seed 1049
+ERROR:root:Epoch 7 error 13.855613806346149. Training error 122.555302587542. Accuracy 0.55
+ERROR:root:Testing set accuracy is 0.25 for seed 1050
+ERROR:root:Epoch 1101 error 6.768475344309522. Training error 0.3321648827032496. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.51 for seed 1051
+ERROR:root:Epoch 194 error 9.582636261820499. Training error 1.803737471928241. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.52 for seed 1052
+ERROR:root:Epoch 241 error 9.449814192847754. Training error 1.5785284551169623. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.5 for seed 1053
+ERROR:root:Epoch 1287 error 8.851772968540732. Training error 0.29761115474945976. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.51 for seed 1054
+ERROR:root:Epoch 10001 error 4.960971288827004. Training error 0.05133183879539449. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.5 for seed 1055
+ERROR:root:Epoch 10001 error 4.647511053058267. Training error 0.052193416823186616. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.56 for seed 1056
+ERROR:root:Epoch 10001 error 6.30305286945698. Training error 0.04779535211410692. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.54 for seed 1057
+ERROR:root:Epoch 430 error 7.4201903490162495. Training error 0.8955661430924762. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.53 for seed 1058
+ERROR:root:Epoch 73 error 7.292035208632108. Training error 5.468443857226113. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.54 for seed 1059
+ERROR:root:Epoch 454 error 4.942094494718128. Training error 0.8673096481100646. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.53 for seed 1060
+ERROR:root:Epoch 681 error 7.15652395987988. Training error 0.577141225545314. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.52 for seed 1061
+ERROR:root:Epoch 870 error 5.908571457183258. Training error 0.4447908218826546. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.55 for seed 1062
+ERROR:root:Epoch 10001 error 3.956673816990776. Training error 0.05244417922754392. Accuracy 0.95
+ERROR:root:Testing set accuracy is 0.54 for seed 1063
+ERROR:root:Epoch 494 error 6.491894369251616. Training error 0.7922327415015205. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.55 for seed 1064
+ERROR:root:Epoch 346 error 8.320087449784003. Training error 1.1021556986540435. Accuracy 0.75
+ERROR:root:Testing set accuracy is 0.52 for seed 1065
+ERROR:root:Epoch 2194 error 6.391463312107199. Training error 0.18674869189426763. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.57 for seed 1066
+ERROR:root:Epoch 163 error 8.70049422682207. Training error 2.36283123597023. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.53 for seed 1067
+ERROR:root:Epoch 10001 error 3.5082637721024352. Training error 0.05315436401210384. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.55 for seed 1068
+ERROR:root:Epoch 2980 error 6.174698085950087. Training error 0.1269851656602546. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.55 for seed 1069
+ERROR:root:Epoch 10001 error 3.237988734455159. Training error 0.05106849181622041. Accuracy 1.0
+ERROR:root:Testing set accuracy is 0.55 for seed 1070
+ERROR:root:Epoch 10001 error 2.460942911838753. Training error 0.051453146922380955. Accuracy 1.0
+ERROR:root:Testing set accuracy is 0.49 for seed 1071
+ERROR:root:Epoch 9916 error 4.312598183040382. Training error 0.05127605894404855. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.51 for seed 1072
+ERROR:root:Epoch 71 error 8.728625491081253. Training error 5.362204761123747. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.52 for seed 1073
+ERROR:root:Epoch 10001 error 3.4097293504562414. Training error 0.05150589357485142. Accuracy 0.95
+ERROR:root:Testing set accuracy is 0.52 for seed 1074
+ERROR:root:Epoch 1114 error 6.961890130717735. Training error 0.3491966872019068. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.51 for seed 1075
+ERROR:root:Epoch 1500 error 6.230559187629532. Training error 0.24789315316781232. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.53 for seed 1076
+ERROR:root:Epoch 6724 error 5.170057013105554. Training error 0.07106939483507284. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.52 for seed 1077
+ERROR:root:Epoch 395 error 8.158064989195433. Training error 0.9127150148440397. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.51 for seed 1078
+ERROR:root:Epoch 10001 error 5.5941620111144985. Training error 0.047401368170925814. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.57 for seed 1079
+ERROR:root:Epoch 64 error 9.632909160005857. Training error 6.106045031510979. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.54 for seed 1080
+ERROR:root:Epoch 2636 error 6.4502124547004955. Training error 0.15563447029757949. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.52 for seed 1081
+ERROR:root:Epoch 754 error 8.78789061030221. Training error 0.49434671167389865. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.55 for seed 1082
+ERROR:root:Epoch 1064 error 7.371794906463367. Training error 0.36141805838785873. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.52 for seed 1083
+ERROR:root:Epoch 105 error 8.924507505791855. Training error 3.610837963524887. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.51 for seed 1084
+ERROR:root:Epoch 1137 error 6.38187148450432. Training error 0.3429196596135863. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.53 for seed 1085
+ERROR:root:Epoch 10001 error 6.5141005394913805. Training error 0.047948551436326675. Accuracy 0.75
+ERROR:root:Testing set accuracy is 0.54 for seed 1086
+ERROR:root:Epoch 43 error 9.99123168664272. Training error 9.629673604109485. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.53 for seed 1087
+ERROR:root:Epoch 1478 error 6.514659505730381. Training error 0.2689597410698329. Accuracy 0.75
+ERROR:root:Testing set accuracy is 0.54 for seed 1088
+ERROR:root:Epoch 286 error 7.279466329707523. Training error 1.3637479192394304. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.53 for seed 1089
+ERROR:root:Epoch 144 error 9.568567650689085. Training error 2.738031668979384. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.54 for seed 1090
+ERROR:root:Epoch 7883 error 4.642215734637329. Training error 0.061437758777172634. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.56 for seed 1091
+ERROR:root:Epoch 220 error 6.4584385910402595. Training error 1.8022583160161088. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.51 for seed 1092
+ERROR:root:Epoch 308 error 7.031977479221368. Training error 1.197949846768981. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.53 for seed 1093
+ERROR:root:Epoch 298 error 9.149009134646445. Training error 1.319251816300694. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.54 for seed 1094
+ERROR:root:Epoch 475 error 7.954117330027117. Training error 0.8265301738222078. Accuracy 0.8
+ERROR:root:Testing set accuracy is 0.52 for seed 1095
+ERROR:root:Epoch 10001 error 4.793081593564452. Training error 0.0521480009043567. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.55 for seed 1096
+ERROR:root:Epoch 9118 error 6.640539338845578. Training error 0.05417307350428566. Accuracy 0.9
+ERROR:root:Testing set accuracy is 0.54 for seed 1097
+ERROR:root:Epoch 1227 error 6.5645313188769805. Training error 0.3129604675815587. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.47 for seed 1098
+ERROR:root:Epoch 439 error 7.420269240190322. Training error 0.8769855275536795. Accuracy 0.85
+ERROR:root:Testing set accuracy is 0.53 for seed 1099

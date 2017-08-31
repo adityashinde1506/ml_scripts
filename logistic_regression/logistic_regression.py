@@ -5,11 +5,11 @@ import sys
 
 import logging
 
-logging.basicConfig(level=logging.DEBUG)#,filename="logagain.txt")
+logging.basicConfig(level=logging.ERROR,filename="logwithrandom.txt")
 
 numpy.seterr(over="ignore")
-#seed=int(sys.argv[5])
-seed=1005
+seed=int(sys.argv[5])
+#seed=1023
 numpy.random.seed(seed)
 
 class LogisticRegression(object):
@@ -50,8 +50,8 @@ class LogisticRegression(object):
         #_min=-4.0*numpy.sqrt(6.0/(feature_dim+1))
         _min=0
         _max=4.0*numpy.sqrt(6.0/(feature_dim+1))
-        #self.W=numpy.random.uniform(size=(feature_dim,1),low=_min,high=_max)
-        self.W=numpy.zeros(shape=(feature_dim,1))
+        self.W=numpy.random.uniform(size=(feature_dim,1),low=_min,high=_max)
+        #self.W=numpy.zeros(shape=(feature_dim,1))
         self.b=numpy.zeros(shape=(1,))
         epoch=1
         min_cost=0.0
@@ -76,7 +76,7 @@ class LogisticRegression(object):
                 logging.info("Restoring backup weights")
                 self.W=prev_W
                 accuracy=self.accuracy(self.predict(test_X),test_y)
-                logging.info("Epoch {} error {}. Training error {}. Accuracy {}".format(epoch,val_cost,cost,accuracy))
+                logging.error("Epoch {} error {}. Training error {}. Accuracy {}".format(epoch,val_cost,cost,accuracy))
                 break
             grad=self.__gradient(output,train_y,train_X)
             self.b=self.b-(self.alpha*numpy.mean(output-train_y))
