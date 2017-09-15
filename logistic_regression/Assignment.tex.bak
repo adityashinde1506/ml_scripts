@@ -1,0 +1,84 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\begin{document}
+\title{Assignment 1}
+\author{Aditya Shinde}
+\maketitle
+
+\section{Conditional probability and the chain rule}
+\subsection*{1}
+\begin{align}
+& P\left(A|B\right) =\frac{P\left(A \cap B\right)}{P\left(B\right)} & \\
+& P\left(A|B\right)\times P\left(B\right)=P\left(A \cap B\right) &\\
+& Similarly, for P\left(A \cap B \cap C \right) &\\
+& P\left(A \cap B \cap C \right)=P\left(A \cap \left( B \cap C \right) \right) & \\
+& = P\left(A | B \cap C \right) \times P\left(B \cap C\right)  & Using\ (2)& \\
+& = P\left(A | B \cap C \right) \times P\left(B | C\right) \times P\left(C\right)  & Also\ using (2)& \\
+& \therefore P\left(A \cap B \cap C \right)=P\left(A | B \cap C \right) \times P\left(B | C\right) \times P\left(C\right)
+\end{align}
+\subsection*{2}
+Consider $A$ and $B$ as two events. Now, the probability that $A$ and $B$ occur at the same time is given by $P\left(A \cap B\right)$.\\
+From the law of conditional probability, the probability that $A$ occurs given that $B$ has occured is, 
+$$P \left( A | B \right) = \frac{P \left( A \cap B \right)}{P\left(B\right)}$$
+Similarly, the probability that $B$ occurs given that $A$ has occured is, 
+$$P \left( B | A \right) = \frac{P \left( A \cap B \right)}{P\left(A\right)}$$
+We can relate both the equations of conditional probability above as,
+$$P \left( A | B \right) \times P\left(B\right) = P \left( B | A \right) \times P\left(A\right)$$
+$$\therefore P \left( A | B \right) = P \left( B | A \right) \frac{P\left(A\right)}{P\left(B\right)}$$
+\newpage
+\section{Total probability}
+\subsection*{1}
+Let $D_{F}$ be the random variable which represents the fair die and $D_{L}$ be the one which represents the loaded die. \\
+The probability that the fair die will be rolled is $p$ and the probability that the loaded die will be rolled is $(1-p)$. \\
+The expected value of the die roll will be,
+\begin{align*}
+E\left[D\right] &= pE\left[ D_{F} \right] + (1-p)E\left[ D_{L}\right]& \\
+&=p\Sigma x_{i}D_{F}+(1-p)\Sigma x_{i}D_{L}& \\
+E\left[D\right]&=3.5p+4.5(1-p)& \\
+E\left[D\right]&=4.5-p& \\
+\end{align*}
+\subsection*{2}
+Variance is,
+\begin{align*}
+Var[D]&=E[D^{2}]-E[D]^{2}& \\
+&=(23.5-8.34p)-(4.5 - p)^{2}& \\
+&=p^{2}-17.34p+3.25& \\
+\end{align*}
+\section{Naive Bayes}
+\subsection*{1}
+$X= \left\{ x_{1},x_{2},...,x_{n} \right\} $ and attributers $x_{2}$ to $x_{n}$ are continous.\\
+So if the continous attribues are Gaussians, we have to compute,
+$$P \left(x|y\right)=\frac{1}{\sqrt{2 \pi \sigma_{x,y}^{2}}}e^{-\frac{1}{2} \left( \frac{\left(x-\mu_{x,y} \right)^{2}}{\sigma_{x,y}^{2}}\right)}$$
+We have to compute this for $n-1$ attributes since the first is a boolean. For these $n-1$ continous attributes, we have to compute the mean and variance for each which makes $2\left(n-1 \right)$ parameters to be estimated. Including the priors for the two target classes, we have to compute $2(2(n-1) + 1) = 4n-2$ parameters.
+\subsection*{2}
+If the assumption of conditional independence is not used,\\
+For continous attributes we have $2(n-1)$ parameters.
+For the boolean attribute, there is $1$.
+So the total number parameters to be calculated are,
+$$2^{1+2(n-1)}-1$$
+$$=2^{2n-1}-1$$
+\section{Logistic Regression}
+\subsection*{1}
+For a $X$ to belong to a particular class, we need \\ $P(Y=1|X)>0.5$ or $P(Y=0|X)>0.5$.\\
+But at the decision boundary both classes are equally probable. \\
+Let $h=W^{T}X$
+\begin{align*}
+& P(Y=0|X) = P(Y=1|X) & \\
+& \frac{1}{1+e^{-h}} = \frac{e^{-h}}{1+e^{-h}} & \\
+& 1=e^{-h}& \\
+& \ln{1} = \ln{e^{-h}} & \\
+& h = 0 & \\
+& \therefore W^{T}X = 0& \\
+\end{align*}
+This is the decision boundary. And it is linear in $x$.
+\subsection*{2}
+The one advantage of logistic regression over naive bayes is that it works well even if the features are not independent. Also logistic regression does well for continous attributes.\\
+The disadvantage is the training process. Since logistic regression uses a gradient based optimization technique, it can get stuck in a local minimum. Also logistic regression is susceptible to overfitting.
+  
+\section*{5}
+\subsection*{1}
+If the Naive Bayes encounters a word which was not observed in training, it will compute its probability as $0$.
+\end{document}

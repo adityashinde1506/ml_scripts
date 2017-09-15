@@ -5,38 +5,50 @@ import sys
 
 import logging
 
-logging.basicConfig(level=logging.ERROR)#,filename="logwitheverything.txt")
+logging.basicConfig(level=logging.DEBUG)#,filename="logwithrandom.txt")
 
 numpy.seterr(over="ignore")
 #seed=int(sys.argv[5])
-seed=1023    # For random shuffling since I have to split for validation set
+seed=1014
 numpy.random.seed(seed)
+
+class GAOptimizer(object):
+
+    def __init__(self,feature_dim,pop=300):
+        self.population=numpy.random.random(size=(pop,feature_dim))/100.0
+        self.new_gen=numpy.zeros_like(self.population)
+
+    def compute_output(self,X):
+        return numpy.dot(X,self.population.T)
+
+    def optimize(self,cost):
+        indices=cost.argsort()
+        self.population=self.population[indices]
 
 class LogisticRegression(object):
 
     def __init__(self,alpha=0.001,l=0.001):
-        self.alpha=alpha # Learning rate
-        self.l=l # Regularisation parameter
+        self.alpha=alpha
+        self.l=l
         self.W=None
         self.b=None
 
     def __sigmoid(self,X):
-        return numpy.clip(1.0/(1.0+numpy.exp((-1)*(X))),0.000001,0.999999) # Clipping to avoid sigmoid saturation.
+        return numpy.clip(1.0/(1.0+numpy.exp((-1)*(X))),0.000001,0.999999)
 
     def __cost(self,h,y):
-        cost=numpy.dot((-1)*y.T,numpy.log(h))-numpy.dot((1-y).T,numpy.log(1-h)) # For early stopping criteria
-        print(cost.shape)
-        sys.exit()
+        cost=(numpy.dot((-1)*y.T,numpy.log(h))-numpy.dot((1-y).T,numpy.log(1-h)))
+        return cost
 
     def __output(self,X):
         return numpy.dot(X,self.W)+self.b
 
     def __gradient(self,h,y,X):
-        return numpy.dot(X.T,(h-y))+((self.l/2)*self.W) # regularised gradient
+        return numpy.dot(X.T,(h-y))+((self.l/2)*self.W)
 
     def predict(self,X):
         output=self.__sigmoid(self.__output(X))
-        return (output[:]>0.5) # predicts boolean outputs
+        return (output[:]>0.5)
 
     def accuracy(self,h,y):
         total=y.shape[0]
@@ -47,46 +59,19 @@ class LogisticRegression(object):
     def fit(self,X,y):
         feature_dim=X.shape[1]
         y=y[:,numpy.newaxis]
-        train_X,train_y,test_X,test_y=self.create_train_test(X,y) # Not really a test set. Using it for validation.
-        self.W=numpy.zeros(shape=(feature_dim,1))
+        train_X,train_y,test_X,test_y=self.create_train_test(X,y)
+        optimizer=GAOptimizer(train_X.shape[1],10)
         self.b=numpy.zeros(shape=(1,))
         epoch=1
-        min_cost=0.0 # For storing minimum cost and detect increase in validation error in case of overfitting.
-        prev_grad=0 # For momentum
-        patience=5 # early stopping
+        min_cost=0.0
+        prev_grad=0
+        patience=5
         while epoch:
-            output=self.__sigmoid(self.__output(train_X)) 
-            cost=self.__cost(output,train_y) # Cost on training iteration
-            val_cost=self.__cost(self.__sigmoid(self.__output(test_X)),test_y) # Cost on validation set
-            if val_cost > min_cost and epoch != 1:
-                logging.info("Skipping weight backup.")
-                logging.info("Decreasing patience and alpha.")
-                self.alpha*=0.1 # Learning rate decay
-                patience-=1
-                logging.info("Replacing with previous backup.")
-                self.W=prev_W # weight roll back 
-            else:
-                min_cost=val_cost
-                prev_W=self.W
-            #logging.debug("prev {} now {}".format(prev_cost,val_cost))
-            if self.alpha < 0.000001 or epoch > 10000 or patience == 0:
-                logging.info("Restoring backup weights")
-                self.W=prev_W # Restore weights for minimum error and exit.
-                accuracy=self.accuracy(self.predict(test_X),test_y)
- #               logging.error("Epoch {} error {}. Training error {}. Accuracy {}".format(epoch,val_cost,cost,accuracy))
-                break
-            grad=self.__gradient(output,train_y,train_X)
-            self.b=self.b-(self.alpha*numpy.mean(output-train_y))
-            self.W=self.W-(self.alpha*grad)-(0.9*prev_grad)
-            prev_grad=self.alpha*grad
-            if epoch % 100 == 0:
-                accuracy=self.accuracy(self.predict(test_X),test_y)
-                logging.info("Epoch {} error {}. Training error {}. Accuracy {}".format(epoch,val_cost,cost,accuracy))
-#            if epoch % 1000 == 0:
-#                self.alpha=0.0001
-#            if epoch % 5000 == 0:
-#                self.alpha=0.00001
-
+            output=self.__sigmoid(optimizer.compute_output(train_X))
+            cost=self.__cost(output,train_y)
+            val_cost=self.__cost(self.__sigmoid(optimizer.compute_output(test_X)),test_y)
+            optimizer.optimize(cost.squeeze())
+            break
             epoch+=1
 
     def create_train_test(self,X,y,split=0.1):
@@ -155,7 +140,7 @@ def get_dataset(filename,enforce=None):
     #X=(X-numpy.mean(X))/(1+numpy.var(#X))
     #X=numpy.apply_along_axis(scale,0,X)
     #print(X)
-    return tf(X) # returns tf idf of the document matrix
+    return tf(X) 
 
 if __name__=="__main__":
 
@@ -171,13 +156,13 @@ if __name__=="__main__":
     #X=tf(X)
     #sys.exit()
 # learn
-    LR=LogisticRegression(alpha=0.01)
+    LR=LogisticRegression(alpha=0.1)
     LR.fit(X,labels)
-    logging.info("Beginning test.")
-    X_test=get_dataset(sys.argv[3],enforce_shape)
+#    logging.info("Beginning test.")
+#    X_test=get_dataset(sys.argv[3],enforce_shape)
 #    y_test=load_data(sys.argv[4])
 #    logging.error("Testing set accuracy is {} for seed {}".format(LR.accuracy(LR.predict(X_test),y_test[:,numpy.newaxis]),seed))
-    out=LR.predict(X_test)
-    for i in out[:,0]:
-        print(int(i))
-        pass
+#    out=LR.predict(X_test)
+#    for i in out[:,0]:
+#        print(int(i))
+#        pass
