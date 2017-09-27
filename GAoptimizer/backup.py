@@ -4,8 +4,12 @@ import sys
 import logging
 import time
 
-logging.basicConfig(level=logging.DEBUG)#,filename="logwithrandom.txt")
+logging.basicConfig(level=logging.ERROR)#,filename="logwithrandom.txt")
 
+numpy.seterr(over="ignore")
+#seed=int(sys.argv[5])
+seed=1014
+numpy.random.seed(seed)
 
 class GAOptimizer(object):
 
@@ -14,9 +18,9 @@ class GAOptimizer(object):
         self.m=m
         self.size=(pop,feature_dim)
         #print(self.s_index)
-        self.population=numpy.random.random(size=(pop,feature_dim))/10.0
+        self.population=numpy.random.random(size=(pop,feature_dim))/1.0
         self.best=None
-        #self.least_cost=9999999.0
+        self.least_cost=9999999.0
 
     def gen_init(self):
         self.new_gen=numpy.zeros_like(self.population)
@@ -30,10 +34,7 @@ class GAOptimizer(object):
     def mutator(self):
         random_mat=numpy.random.normal(size=self.size)
         mut_matrix_=numpy.random.binomial(1,self.m,size=self.size)
-        if numpy.random.random() > 0.5:
-            mutators=numpy.multiply(mut_matrix_,random_mat)
-        else:
-            mutators=numpy.multiply(mut_matrix_,random_mat)*0.1
+        mutators=numpy.multiply(mut_matrix_,random_mat)
         mask=(mutators==0)
         self.population=numpy.add(numpy.multiply(mask,self.population),mutators)
 
@@ -47,19 +48,18 @@ class GAOptimizer(object):
         #print(self.population.sum())
         self.gen_init()
         parents=self.population[:self.s_index]
-        self.best=parents[0]
         self.new_gen[:self.s_index]=parents
         for i in range(self.s_index,self.population.shape[0]):
             self.new_gen[i]=self.__reproduce(parents)
         self.population=self.new_gen
         self.mutator()
 
-    def optimize(self,cost):
-        logging.debug("cost :{}".format(cost.mean()))
+    def optimize(self,cost,val):
+        logging.debug("cost :{} , val :{}".format(cost.mean(),val.mean()))
         indices=cost.argsort()
         self.population=self.population[indices]
         #if val.mean() < self.least_cost:
-        #self.best=self.population[0]
+        self.best=self.population[0]
         self.create_next_gen()
 
 class LogisticRegression(object):
@@ -75,7 +75,7 @@ class LogisticRegression(object):
         return cost
 
     def acc_cost(self,h,y):
-        return -numpy.dot(h.T,y)
+        return numpy.dot(h.T,y)
 
     def __output(self,X):
         return self.optimizer.compute_output(X)
@@ -99,22 +99,21 @@ class LogisticRegression(object):
     def fit(self,X,y):
         feature_dim=X.shape[1]
         y=y[:,numpy.newaxis]
-        train_X,train_y=X,y
+        train_X,train_y,test_X,test_y=self.create_train_test(X,y)
         self.optimizer=GAOptimizer(train_X.shape[1],self.args['population'],self.args['survival'])
         epoch=1
         min_cost=0.0
         prev_grad=0
         patience=5
-        #print(train_X.shape)
         while epoch:
             output=self.__sigmoid(self.__output(train_X))
             cost=self.__cost(output,train_y)
-            #val_cost=self.__cost(self.__sigmoid(self.__output(test_X)),test_y)
-            #if cost.mean() < 10.0:
-            #    break
-            self.optimizer.optimize(cost.squeeze())
+            val_cost=self.__cost(self.__sigmoid(self.__output(test_X)),test_y)
+            if val_cost.mean() < 10.0:
+                break
+            self.optimizer.optimize(cost.squeeze(),val_cost.squeeze())
             if epoch % 10 == 0:
-                logging.info("Accuracy after {} epochs is {}".format(epoch,self.accuracy(self.predict(train_X),train_y)))
+                logging.info("Accuracy after {} epochs is {}".format(epoch,self.accuracy(self.predict(test_X),test_y)))
             if epoch == self.args['generations']:
                 break
             epoch+=1
@@ -137,7 +136,7 @@ def get_doc_data(data_set,doc_id):
     return data_set[data_set[:,0]==doc_id]
 
 def create_feature_vector(word_counts,max_len):
-    vector=numpy.zeros(max_len,dtype=numpy.int32)
+    vector=numpy.zeros(max_len)
     for word_count in word_counts:
         try:
             vector[word_count[1]]=word_count[2]
@@ -152,15 +151,12 @@ def tf(X):
     num_docs=numpy.apply_along_axis(lambda x:x[x!=0].shape[0],0,X)+1
     idf=numpy.log(X.shape[0]/num_docs)
     tf=numpy.apply_along_axis(lambda x:x/numpy.max(x),1,X)
-    return tf
+    return tf*idf
 
 def get_dataset(filename,enforce=None):
 # load dataset
     logging.info("Loading data.")
     data=load_data(filename)
-    #if enforce!=None:
-    #   data=data[:,[1,0,2]]
-    #print(data)
     logging.info("Data loaded.")
 # get word count for each document
     doc_features=list()
@@ -183,32 +179,22 @@ def get_dataset(filename,enforce=None):
     logging.info("Vectors created.")
     logging.info("Collecting to dataset matrix.")
     X=numpy.array(vectors)
-    return tf(numpy.hstack((numpy.ones(shape=(X.shape[0],1)),X))) 
+    return tf(X) 
 
-
-def _load_X(path):
-    # Load the data.
-    mat = numpy.loadtxt(path, dtype = int)
-    max_doc_id = mat[:, 0].max()
-    max_word_id = mat[:, 1].max()
-    X = numpy.zeros(shape = (max_doc_id, max_word_id))
-    for (docid, wordid, count) in mat:
-        X[docid - 1, wordid - 1] = count
-    return X
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "Assignment 2",
         epilog = "CSCI 4360/6360 Data Science II: Fall 2017",
         add_help = "How to use",
         prog = "python assignment2.py [train-data] [train-label] [test-data] <optional args>")
-    parser.add_argument("paths", nargs = 4)
+    parser.add_argument("paths", nargs = 3)
     parser.add_argument("-n", "--population", default = 100, type = int,
         help = "Population size [DEFAULT: 100].")
     parser.add_argument("-s", "--survival", default = 0.3, type = float,
         help = "Per-generation survival rate [DEFAULT: 0.3].")
-    parser.add_argument("-m", "--mutation", default = 0.01, type = float,
+    parser.add_argument("-m", "--mutation", default = 0.05, type = float,
         help = "Point mutation rate [DEFAULT: 0.01].")
-    parser.add_argument("-g", "--generations", default = 100, type = int,
+    parser.add_argument("-g", "--generations", default = 300, type = int,
         help = "Number of generations to run [DEFAULT: 100].")
     parser.add_argument("-r", "--random", default = -1, type = int,
         help = "Random seed for debugging [DEFAULT: -1].")
@@ -216,13 +202,13 @@ if __name__ == "__main__":
 
     # Do we set a random seed?
     if args['random'] > -1:
-        numpy.random.seed(args['random'])
+        numpy.random.seed(1014)
 
     # Read in the training data.
     #X, y = _load_train(args["paths"][0], args["paths"][1])
     logging.info("Loading data.")
     X=get_dataset(args['paths'][0])
-    enforce_shape=(X.shape[0],X.shape[1]-1) # for bias
+    enforce_shape=X.shape
     logging.info("Data loaded.")
     labels=load_data(args['paths'][1])
 #    print(X.shape)
@@ -231,11 +217,11 @@ if __name__ == "__main__":
     LR.fit(X,labels)
     logging.info("Beginning test.")
     X_test=get_dataset(args['paths'][2],enforce_shape)
-    y_test=load_data(args['paths'][3])
-    #print(X_test.shape)
+#    y_test=load_data(args['paths'][3])
+#    print(X_test.shape)
 #    print(y_test.shape)
-    logging.error("Testing set accuracy is {} for seed".format(LR.accuracy(LR.predict(X_test),y_test[:,numpy.newaxis])))
+#    logging.error("Testing set accuracy is {} for seed {}".format(LR.accuracy(LR.predict(X_test),y_test),seed))
     out=LR.predict(X_test)
     for i in out:
-#        print(int(i))
+        print(int(i))
         pass

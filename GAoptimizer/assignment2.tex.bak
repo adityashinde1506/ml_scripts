@@ -84,10 +84,9 @@
 \horrule{2pt} \\[0.4cm] % Thick bottom horizontal rule
 }
 
-\author{DUE: Thursday, September 14 by 11:59:59pm} % Your name
+\author{Aditya Shinde} % Your name
 
 %\date{\normalsize\today} % Today's date or a custom date
-\date{\normalsize Out August 31, 2017}
 
 \begin{document}
 
@@ -117,14 +116,14 @@ $$\epsilon \sim Lap(0,b)$$
 $$\epsilon=y-w^{T}x$$
 $$ y \sim Lap(w^{T}x,b)$$
 
-$$P(Y|x_{i};w)=\Pi_{i} Lap(w^{T}x,b)$$
-$$P(Y|x_{i};w)=\Pi_{i} \frac{1}{2b} e^{(\frac{-|y-w^{T}x|}{b})}$$
-$$\log P(Y|x_{i};w)=\sum -\log 2b+\left( \frac{-|y-w^{T}x|}{b}\right)$$
+$$P(Y|x_{i};w)=\textrm{argmax}\Pi_{i} Lap(w^{T}x,b)$$
+$$P(Y|x_{i};w)=\textrm{argmax}\Pi_{i} \frac{1}{2b} e^{(\frac{-|y-w^{T}x|}{b})}$$
+$$\log P(Y|x_{i};w)=\textrm{argmax}\sum -\log 2b+\left( \frac{-|y-w^{T}x|}{b}\right)$$
 
 Now, $\log 2b$ is a constant, \\
 So we can write $J_{Lap}(w)$ as,\\
 
-$$J_{Lap}(w)=\sum \left( |y-w^{T}x|\right)$$
+$$J_{Lap}(w)=\textrm{argmin}\sum \left( |y-w^{T}x|\right)$$
 
 \subsection*{2}
 
@@ -163,66 +162,16 @@ Now in this case $\beta$ is a random variable with variance $\frac{I\sigma^{2}}{
 If $\lambda \to 0$ in this case, that means $Var[\beta] \to \inf$, that is variance tends to infinity. So the samples will be far away. \\
 Similarly, if $\lambda \to \inf$, $Var[\beta] \to 0$ which means $p(\beta)$ will be a single point at $0$ and we would essentially be fitting only the intercept.
 
-\subsection{Evolutionary Computing \textbf{[40pts]}}
+\subsection{Evolutionary computation}
+\subsection*{1}
+Generational genetic algorithms use specific distint generations as different sets of parameters. By keeping distinct generations across epochs, we make sure that none of the individuals from the previous generation are in the current generation. This is specially helpful when the cost function is dynamic. It can also be helpful to find multiple solutions.
 
-\textbf{[5pts]} Compare generational versus steady state genetic algorithms. Discuss the advantages and disadvantages of each. \\
+Steady state GAs on the other hand use a replacement mechanism. The newer individuals which are generated using genetic operators are swapped with the weaker individuals of the current generation.
 
-\textbf{[5pts]} Compare Michigan versus Pittsburgh classifier systems. Discuss the advantages and disadvantages of each. \\
+One of the advantages of steady state GA's is that they require less resources in terms of memory since the population size is constant. Generational GA's on the other hand need twice as much memory. But steady state GA's usually take more time to converge.
+\subsection*{2}
+Pittsburgh and Michigan classifers both work on the same principles of evolutionary computation. The distinction is in the role of a single individual. In the Pittsburgh classifiers, each individual is a complete solution consisting of many rules. In case Michigan classifiers, an individual is just an element of a rule based system. Many such individuals need to be combined to make a complete solution.
 
-\textbf{[30pts]} In this part, you'll re-implement your logistic regression code from the previous assignment to use a simple genetic algorithm to learn the weights, instead of gradient descent. \\
-
-Your script \texttt{assignment2.py} should accept the following required arguments:
-
-\begin{enumerate}
-	\item a file containing training data (same as Assignment 1)
-	\item a file containing training labels (same as Assignment 1)
-	\item a file containing testing data (same as Assignment 1)
-\end{enumerate}
-
-It should also be able to accept the following \emph{optional} arguments:
-
-\begin{itemize}
-	\item \texttt{-n}: a population size (default: 200)
-	\item \texttt{-s}: a per-generation survival rate (default: 0.3)
-	\item \texttt{-m}: a mutation rate (default: 0.05)
-	\item \texttt{-g}: a maximum number of generations (default: 50)
-	\item \texttt{-r}: a random seed (default: -1)
-\end{itemize}
-
-The handout on AutoLab contains a skeleton script with the command-line parsing ready to go. It also contains subroutines that ingest and parse out the data files into NumPy arrays. You'll use the same dataset as before: the training set for your evolutionary algorithm to learn good weights, and the testing set to evaluate the weights. \\
-
-Your evolutionary algorithm for learning the weights should have a few core components: \\
-
-\textbf{Random population initialization.} You should initialize a full array of weights \emph{randomly} (don't use all 0s!); this counts as a single ``person'' in the full population. Consequently, initialize $n$ arrays of weights randomly for your full population. You'll evaluate each of these weights arrays independently and pick the best-performing ones to carry on to the next generation. \\
-
-\textbf{Fitness function.} This is a way of evaluating how ``good'' your current solution is. Fortunately, we have this already: the objective function! You can use the weights to predict the training labels (as you did during gradient descent); the fitness for a set of weights is then the \emph{average classification accuracy}. \\
-
-\textbf{Reproduction.} Once you've evaluated the fitness of your current population, you'll use that information to evolve the ``strongest.'' You'll first take the top $s\%$--the $ns$ arrays of weights with the highest fitness scores--and set them aside as the ``parents'' of the next generation. Then, you'll ``breed'' random pairs of these parents parents to produce ``children'' until you have $n$ arrays of weights again. The breeding is done by simply averaging the two sets of parent weights together. \\
-
-\textbf{Mutation.} Each individual weight has a mutation rate of $m$. Once you've computed the ``child'' weight array from two parents, you need to determine where and how many of the elements in the child array will mutate. First, flip a coin that lands on heads (i.e., indicates mutation) with probability $m$ (the mutation rate) for each weight $w_i$. Then, for each mutation, you'll generate the new $w_i$ by sampling from a Gaussian distribution with mean and variance set to be the empirical mean and variance of \emph{all} the $w_i$ weights of the \emph{previous} generation. So if $W_{p}$ is the $n \times |\beta|$ matrix of the previous population of weights, then we can define $\mu_i = W_p\left[:, i\right]\textrm{.mean()}$ and $\sigma_i^2 = W_p\left[:, i\right]\textrm{.var()}$. Using these quantities, we can then draw our new weight $w_i \sim \mathcal{N}(\mu_i, \sigma_i^2)$. \\
-
-\textbf{Generations.} You'll run the fitness evaluation, reproduction, and mutation repeatedly for $g$ generations, after which you'll take the set of weights from the final population with the highest fitness and evaluate these weights against the testing dataset.
-
-Your script should be able to be invoked as follows: \\
-
-\texttt{> python assignment2.py train.data train.label test.data} \\
-
-with the optional parameters then able to be stated at the end. The data files (\texttt{train.data} and \texttt{test.data}) contain three numbers on each line: \\
-
-\texttt{<document\_id> <word\_id> <count>} \\
-
-Each row of the data files contains the count of how often a given word (identified by ID) appears in certain documents (also identified by ID). The corresponding labels for the data has only one number per row in the file: the label, 1 or 0, of the document with ID corresponding to the row of the label in the label file. For example, a 0 on the $27^{th}$ line of the label file means the document with ID 27 has the label 0. \\
-
-After you've found your final weights and used them to make predictions on the test set, your code should print a predicted label (0 or 1) by itself on a single line, \emph{one for each document}--this means a single line of output per unique document ID (or per line in one of the \texttt{.label} files). The output will be used to autograde your GA on AutoLab. For example, if the following \texttt{test.data} file has four unique document IDs in it, your program should print out four lines, each with a 1 or 0 on it, e.g.:
-
-\begin{verbatim}
-> python assignment2.py train.data train.label test.data
-0
-0
-1
-1
-\end{verbatim}
-
-Evolutionary programs \textbf{will take longer} than logistic regression's gradient descent. I strongly recommend staying under a population size of 300, with no more than about 300 generations. \textbf{Make liberal use of NumPy vectorized programming} to ensure your program is running as efficiently as possible. The AutoLab autograder timeout will be extended to about 10 minutes, but you should be able to get reasonable training performance without having to go even half that long.
+One of the advantages that Michigan classifers have is diversity. Since the individuals are made of elementary rules, they can be used with many problems easily as compared to Pittsburgh. 
 
 \end{document}
