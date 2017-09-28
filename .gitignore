@@ -1,2 +1,4 @@
 20_newsgroups/
 *.swp
+data/
+writeup/
