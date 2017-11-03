@@ -1,0 +1,239 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+%\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{mathtools}
+\usepackage{amsfonts,amsthm} % Math packages
+\usepackage{wrapfig}
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{numberedblock}
+\usepackage{graphicx}
+
+\hypersetup {
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=blue,          % color of internal links (change box color with linkbordercolor)
+    urlcolor=blue           % color of external links
+}
+
+\usepackage{sectsty} % Allows customizing section commands
+%\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+\allsectionsfont{\normalfont\scshape}
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{0pt} % Customize the height of the header
+
+\usepackage{titlesec}% http://ctan.org/pkg/titlesec
+\titleformat{\section}%
+  [hang]% <shape>
+  {\normalfont\bfseries\Large}% <format>
+  {}% <label>
+  {0pt}% <sep>
+  {}% <before code>
+\renewcommand{\thesection}{}% Remove section references...
+\renewcommand{\thesubsection}{\arabic{subsection}}%... from subsections
+
+%\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{CSCI 4360/6360 Data Science II} \\
+\textsc{Department of Computer Science} \\
+\textsc{University of Georgia} \\ [15pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.3cm] % Thin top horizontal rule
+\huge Assignment 4: I Heard You Like Graphs \\ % The assignment title
+\horrule{2pt} \\[0.4cm] % Thick bottom horizontal rule
+}
+
+\author{Aditya Shinde} % Your name
+
+%\date{\normalsize\today} % Today's date or a custom date
+\date{\normalsize Out October 5, 2017}
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\section*{Questions}
+
+\setcounter{subsection}{0}
+
+\subsection{Spectral Clustering \textbf{[40pts]}}
+
+\subsection*{1}
+$\Theta = 1.5$ . Since the farthest points in each cluster are less than 1.5 units apart but the nearest points between both clusters are more than 1.5 units apart. \\
+
+\subsection*{2}
+For the best clustering and getting a real solution, the graph should be disconnected. It should have $k$ connected components. Even if it does not, spectral clustering will work but the first eigen vector will be all $1$. In this case, it is possible to have $2$ connected components by selecting $\Theta = 1.5$ . That will connect all the points in the same cluster but exclude connections across different clusters. So if all elements in the adjacency matrix are symetric and at the most 1, the corrosponding eigen vectors will be unit vectors. For instance, in the given diagram, there are two different connected components.\\
+One of the components has $m_{1}$ points and the other has $m_{2}$ points. The $A$ matrix will have the shape $(m_{1}+m_{2},m_{1}+m_{2})$
+\[
+\begin{bmatrix}
+1 & 1 & 1 & 1 & \dots & 1 \\
+1 & 1 & 1 & 1 & \dots & 1 \\
+1 & 1 & 1 & 1_{(m_{1},m_{1})} & \dots & 1 \\
+\vdots & \vdots & \vdots & \vdots & 1 & 1 \\
+1 & 1 & 1 & 1 & 1 & 1_{(m_{1}+m_{2},m_{1}+m_{2})} \\
+\end{bmatrix}
+\]
+\\
+The eigen vectors for these will be 
+\[
+\begin{bmatrix}
+	1 \\
+	1 \\
+	1 \\
+	\vdots \\
+	1_{m_{1}} \\
+	0 \\
+	0 \\
+	\vdots \\
+	0 \\
+\end{bmatrix}
+and 
+\begin{bmatrix}
+	0 \\
+	0 \\
+	0 \\
+	\vdots \\
+	0_{m_{1}} \\
+	1 \\
+	1 \\
+	\vdots \\
+	1 \\
+\end{bmatrix}
+\]\\
+The other eigen values will be zero. \\
+
+\subsection*{5}
+The PCA of $X$ is done in terms of its covariance matrix $Q=X^{T}X$
+$$ Q = U \Sigma V^{T}$$
+Here $U$ are the principle components of X.
+The SVD of $Y$ is written as,
+$$Y=U \Sigma V^{T}$$
+$$Y=X^{T}$$
+So,
+$$(X^{T})^{T}=\left(U \Sigma V^{T} \right)^{T}$$
+$$X=V \Sigma U^{T}$$
+$$X^{T}X=V \Sigma U^{T}U \Sigma V^{T}$$
+$U$ is an orthonormal matrix. So $U^{T}U=I$
+$$X^{T}X=V \Sigma^{2} V^{T}$$
+This corrosponds to the PCA equation above. With the difference being that the eigen values are the squares of the singular values.
+\subsection{Hierarchical Clustering \textbf{[20pts]}}
+
+\subsection*{1}
+$$
+\Delta(X, Y) = \sum_{i \in X \cup Y} ||\vec{x}_i - \vec{\mu}_{X \cup Y} ||^2 - \sum_{i \in X} || \vec{x}_i - \vec{\mu}_X ||^2 - \sum_{i \in Y} || \vec{x}_i - \vec{\mu}_Y ||^2
+$$
+\\
+$$
+= \sum_{i \in X \cup Y} ||x_{i}||^{2} - 2 \sum_{i \in X \cup Y}||x_{i}||\mu_{X \cup Y} + \sum_{i \in X \cup Y} \mu_{X \cup Y}^{2}
+$$
+
+$$
+- \left( \sum_{i \in X} ||x_{i}||^{2} - 2 \sum_{i \in X}||x_{i}||\mu_{X} + \sum_{i \in X} \mu_{X}^{2} \right)
+$$
+
+$$
+- \left( \sum_{i \in Y} ||x_{i}||^{2} - 2 \sum_{i \in Y}||x_{i}||\mu_{Y} + \sum_{i \in Y} \mu_{Y}^{2} \right)
+$$
+\\
+Since the norm is squared and the summation is over groups of points,
+$$
+\sum_{i \in X \cup Y} ||x_{i}||^{2} = \sum_{i \in X}||x_{i}||^{2} + \sum_{i \in Y}||x_{i}||^{2}
+$$
+
+And so if we put this in the previous equation,
+
+$$
+\Delta(X, Y) = 2 \sum_{i \in X}||x_{i}||\mu_{X} - \sum_{i \in X} \mu_{X}^{2} + 2 \sum_{i \in Y}||x_{i}||\mu_{Y} - \sum_{i \in Y} \mu_{Y}^{2} - 2 \sum_{i \in X \cup Y}||x_{i}||\mu_{X \cup Y} + \sum_{i \in X \cup Y} \mu_{X \cup Y}^{2}
+$$
+\\
+Now the global mean can be written in terms of $\mu_{X}$ and $\mu_{Y}$ as,
+$$
+\mu_{X \cup Y}=\frac{(n_{X}\mu_{X}+n_{Y}\mu_{Y})}{n_{X}+n_{Y}}
+$$
+\\
+$$
+= 2 \sum_{i \in X}||x_{i}||\mu_{X} - n_{X}\mu_{X}^{2} + 2 \sum_{i \in Y}||x_{i}||\mu_{Y} - n_{Y} \mu_{Y}^{2} - 2 \sum_{i \in X \cup Y}||x_{i}||\mu_{X \cup Y} + (n_{X}+n_{Y})\left( \frac{(n_{X}\mu_{X}+n_{Y}\mu_{Y})}{n_{X}+n_{Y}}\right)^{2}
+$$
+
+$$
+= \left( \frac{(n_{X}\mu_{X}+n_{Y}\mu_{Y})^{2}}{n_{X}+n_{Y}}\right) - n_{X}\mu_{X}^{2} - n_{Y} \mu_{Y}^{2} - 2 \sum_{i \in X \cup Y}||x_{i}||\mu_{X \cup Y} + 2 \sum_{i \in Y}||x_{i}||\mu_{Y} + 2 \sum_{i \in X}||x_{i}||\mu_{X}
+$$
+\\
+$$
+= \left( \frac{(n_{X}\mu_{X}+n_{Y}\mu_{Y})^{2}}{n_{X}+n_{Y}}\right) - n_{X}\mu_{X}^{2} - n_{Y} \mu_{Y}^{2} + 2\left( -\frac{(n_{X}\mu{X}+n_{Y}\mu{Y})^{2}}{n_{X}+n_{Y}} + n_{X}\mu_{X}^{2}  + n_{Y}\mu_{Y}^{2}\right)
+$$
+\\
+$$
+= -\frac{n_{X}n_{Y}(\mu_{X}-\mu_{Y})^{2}}{n_{X}+n_{Y}} + 2\left( -\frac{(n_{X}\mu{X}+n_{Y}\mu{Y})^{2}}{n_{X}+n_{Y}} + n_{X}\mu_{X}^{2}  + n_{Y}\mu_{Y}^{2}\right)
+$$
+\\
+$$
+= -\frac{n_{X}n_{Y}(\mu_{X}-\mu_{Y})^{2}}{n_{X}+n_{Y}} + 2\left( \frac{n_{X}n_{Y}(\mu_{X}-\mu_{Y})^{2}}{n_{X}+n_{Y}}\right)
+$$
+\\
+$$
+= \frac{n_{X}n_{Y}(\mu_{X}-\mu_{Y})^{2}}{n_{X}+n_{Y}}
+$$
+\\
+\subsection*{2}
+No. Ward's metric will not always merge the clusters with closer centers. Ward's metric computes the total cost of merging the clusters. So even if the pair in $P_{2}$ is closer than the pair in $P_{1}$, if the number of points in the clusters in $P_{1}$ is greater than that of $P_{2}$, agglomerative clustering will merge $P_{1}$.
+$$
+\Delta(X, Y) = \sum_{i \in X \cup Y} ||\vec{x}_i - \vec{\mu}_{X \cup Y} ||^2 - \sum_{i \in X} || \vec{x}_i - \vec{\mu}_X ||^2 - \sum_{i \in Y} || \vec{x}_i - \vec{\mu}_Y ||^2
+$$
+So, if,
+$$
+n_{X \cup Y \in P_{2}} >> n_{X \cup Y \in P_{1}}
+$$
+Then, it is possible to have a certain $n$ for which,
+$$
+\Delta(X, Y)_{X \cup Y \in P_{2}} > \Delta(X, Y)_{X \cup Y \in P_{1}}
+$$
+
+
+\end{document}
